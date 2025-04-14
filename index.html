@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vouch Wall</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #0f0f0f;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #1a1a1a;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 600;
+      border-bottom: 2px solid #2d2d2d;
+    }
+    .count {
+      text-align: center;
+      font-size: 16px;
+      margin-top: 10px;
+      color: #888;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      flex: 1;
+    }
+    .vouch {
+      background-color: #1a1a1a;
+      border: 1px solid #2c2c2c;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+    .message-link {
+      display: inline-block;
+      background-color: #2f3136;
+      padding: 6px 12px;
+      border-radius: 4px;
+      color: #7289da;
+      font-size: 15px;
+      text-decoration: none;
+      margin-bottom: 10px;
+    }
+    .message-link:hover {
+      background-color: #3f4248;
+    }
+    .vouch img {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 8px;
+      border: 1px solid #333;
+      margin-top: 10px;
+    }
+    .footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 14px;
+      color: #555;
+      background-color: #0f0f0f;
+      border-top: 2px solid #2d2d2d;
+    }
+  </style>
+</head>
+<body>
+  <header>Vouch Wall</header>
+  <div class="count" id="vouch-count"></div>
+  <div class="container" id="vouch-container"></div>
+  <div class="footer">
+    &copy; 2025 YourServerName. All rights reserved.
+  </div>
+
+  <script>
+
+    const vouchData = [
+      {
+        "message_id": "1361458147952295976",
+        "channel_id": "1086694868132311152",
+        "guild_id": "299949507989340160",
+        "screenshot": "ss/ss1.png"
+      }
+    ];
+
+    const container = document.getElementById('vouch-container');
+    const count = document.getElementById('vouch-count');
+    count.textContent = vouchData.length === 1
+      ? '1 Vouch'
+      : vouchData.length + ' Vouches';
+
+    vouchData.forEach(vouch => {
+      const vouchDiv = document.createElement('div');
+      vouchDiv.className = 'vouch';
+
+      const link = 'https://discord.com/channels/' + vouch.guild_id + '/' + vouch.channel_id + '/' + vouch.message_id;
+
+      vouchDiv.innerHTML = `
+        <a href="${link}" class="message-link" target="_blank">Message Link</a>
+        <img src="${vouch.screenshot}" alt="Vouch Screenshot">
+      `;
+
+      container.appendChild(vouchDiv);
+    });
+  </script>
+</body>
+</html>
